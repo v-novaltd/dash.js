@@ -138,7 +138,7 @@ function Capabilities() {
             return Promise.resolve();
         }
 
-        if (basicConfiguration.codec.includes('video') && Constants.ENHANCEMENT_CODECS.some(cdc => basicConfiguration.codec.includes(cdc))) {
+        if (basicConfiguration.codec.includes('video') && Constants.ENHANCEMENT_CODECS.some(cdc => basicConfiguration.codec.includes(cdc)) && window.LCEVCdec) {
             return Promise.resolve(true);
         }
 
@@ -437,10 +437,23 @@ function Capabilities() {
         }
     }
 
+    /**
+     * Check if dependencyId is correctly formatted, return true if not present.
+     * @param {Representation} rep
+     * @return {boolean}
+     */
+    function isDependencyIdCorrectlyFormatted(rep) {
+        if (!rep.dependencyId) {
+            return true; // dependencyId not present
+        }
+        return !rep.dependencyId.includes(' ');
+    }
+
     instance = {
         areKeyIdsExpired,
         areKeyIdsUsable,
         isCodecSupportedBasedOnTestedConfigurations,
+        isDependencyIdCorrectlyFormatted,
         isProtectionCompatible,
         runCodecSupportCheck,
         setConfig,

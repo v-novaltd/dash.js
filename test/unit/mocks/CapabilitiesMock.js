@@ -45,6 +45,10 @@ class CapabilitiesMock {
     isCodecSupportedBasedOnTestedConfigurations() {
         return true;
     }
+
+    isDependencyIdCorrectlyFormatted() {
+        return true;
+    }
 }
 
 export default CapabilitiesMock;

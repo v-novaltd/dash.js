@@ -546,6 +546,7 @@ describe('Capabilities', function () {
         */
 
         it('should return true for enhancement codecs', function () {
+            window.LCEVCdec = {}; // enhancement codecs are only supported if lcevc_dec.js is loaded
             const res = capabilities.runCodecSupportCheck({ codec: `video/${Constants.ENHANCEMENT_CODECS[0]}` }, Constants.VIDEO);
 
             return res.then(function (isSupported) {

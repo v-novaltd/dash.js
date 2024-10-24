@@ -130,7 +130,8 @@ function CapabilitiesFilter() {
             const config = _createConfiguration(type, rep, codec);
 
             configurations.push(config);
-            const supported = capabilities.isCodecSupportedBasedOnTestedConfigurations(config, type);
+            const supported = capabilities.isCodecSupportedBasedOnTestedConfigurations(config, type) &&
+                capabilities.isDependencyIdCorrectlyFormatted(rep);
             if (!supported) {
                 logger.debug(`[CapabilitiesFilter] Codec ${configurations[i].codec} not supported. Removing Representation with ID ${rep.id}`);
             }
